@@ -25,7 +25,7 @@ export function loadFeedback({ author, receiver }) {
     } else if (receiver) {
         return fetch(`${API_URL}/feedback?for=${receiver}`).then(res => res.json())
     } else {
-        return fetch(`${API_URL}/feedback`)
+        return fetch(`${API_URL}/feedback`).then(res => res.json())
     }
 }
 

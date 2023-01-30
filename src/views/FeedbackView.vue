@@ -6,6 +6,7 @@ import { useUserStore } from "../store";
 import { loadUser, createFeedback } from "../data";
 import router from "../router";
 import FeedbackForm from "../components/FeedbackForm.vue";
+import UserList from "../components/UserList.vue";
 
 export default defineComponent({
   components: { FeedbackForm },
@@ -65,6 +66,7 @@ export default defineComponent({
         />
       </Transition>
     </section>
+
     <Transition>
       <FeedbackForm
         v-if="receiver && receiver.avatar"

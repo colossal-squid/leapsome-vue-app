@@ -13,6 +13,7 @@ app.use(router)
 app.mount('#app')
 const { setLastError } = useUserStore();
 app.config.errorHandler = (err, vm, info) => {
+    console.error(err, vm, info)
     setLastError(err);
     router.push('/error');
 };

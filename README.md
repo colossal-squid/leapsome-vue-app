@@ -1,19 +1,18 @@
 # leapsome-code-challenge
 
-This template should help get you started developing with Vue 3 in Vite.
+Hi guys! Thanks for taking your time and reviewing my code-challenge results!
 
-## Recommended IDE Setup
+Just a few remarks before you start:
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+1. I did change the express backend interface a bit. The repo with my version of backend is: 
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+2. Lint and build - pass! Could i give this to 
 
 ## Project Setup
 
-```sh
+```
 npm install
+npm run dev
 ```
 
 ### Compile and Hot-Reload for Development

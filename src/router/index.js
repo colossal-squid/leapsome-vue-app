@@ -18,7 +18,7 @@ const router = createRouter({
       component: UserView
     },
     {
-      path: '/feedback/:userId',
+      path: '/feedback/:userId?',
       name: 'feedback',
       component: FeedbackView
     },

@@ -2,7 +2,7 @@
 defineProps(["user"]);
 </script>
 <template>
-  <router-link class="flex flex-row bg-slate-300 mr-2 mb-2 p-3 items-center" :to="'/user/' + user.id" tabindex="0">
+  <div @click.stop="$emit('select', user)" class="flex flex-row bg-slate-300 mr-2 mb-2 p-3 items-center cursor-pointer" tabindex="0">
     <img
       :src="user.avatar"
       alt=""
@@ -21,5 +21,5 @@ defineProps(["user"]);
       {{ user.firstName }}
       {{ user.lastName }}
     </div>
-  </router-link>
+  </div>
 </template>

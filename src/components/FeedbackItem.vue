@@ -2,7 +2,7 @@
 defineProps(["feedback", "receiver"]);
 </script>
 <template>
-  <div v-if="feedback && receiver" class="flex flex-col bg-slate-300 m-2 p-3 items-center" tabindex="0">
+  <div v-if="feedback && receiver" class="flex flex-col bg-slate-300 mr-2 mb-2 p-3 items-center" tabindex="0">
     <router-link
       :to="'/user/' + feedback.author.id"
       class="flex flex-row items-center mr-auto min-w-fit overflow-x-hidden"

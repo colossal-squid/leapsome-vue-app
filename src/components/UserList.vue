@@ -6,7 +6,7 @@ defineProps(['users', 'count', 'pageSize', 'page'])
 
 <template>
   <TransitionGroup tag="section" name="list" class="flex flex-row flex-wrap">
-    <UserCard v-for="user in users" :key="user.id" :user="user"/>
+    <UserCard v-for="user in users" :key="user.id" :user="user" @select="user => $emit('select', user)"/>
     <footer class="flex w-full flex-row items-center justify-center">
       <CoreButton @click="$emit('back')">⬅️ Back</CoreButton>
       <p class="text-base px-3" v-if="users">Showing page {{page}} out of {{Math.trunc(count / pageSize)}}</p>
