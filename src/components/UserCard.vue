@@ -1,8 +1,8 @@
 <script setup>
-const props = defineProps(["user"]);
+defineProps(["user"]);
 </script>
 <template>
-  <router-link class="flex flex-row bg-slate-300 m-2 p-3 items-center" :to="'/user/' + user.id" tabindex="0">
+  <router-link class="flex flex-row bg-slate-300 mr-2 mb-2 p-3 items-center" :to="'/user/' + user.id" tabindex="0">
     <img
       :src="user.avatar"
       alt=""
@@ -19,7 +19,7 @@ const props = defineProps(["user"]);
       "
     >
       {{ user.firstName }}
-      {{ user.lastName }} ({{ user.id }})
+      {{ user.lastName }}
     </div>
   </router-link>
 </template>

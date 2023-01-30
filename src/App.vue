@@ -1,12 +1,12 @@
 <script>
-import Header from './components/Header.vue'
+import CoreHeader from './components/CoreHeader.vue'
 import { defineComponent } from "vue";
 import { storeToRefs } from "pinia";
 import { useUserStore } from "./store";
 
 export default defineComponent({
   components: {
-    Header
+    CoreHeader
   },
   setup() {
     const store = useUserStore();
@@ -26,7 +26,7 @@ export default defineComponent({
 
 <template>
   <section class="container">
-    <Header :user="user"/>
+    <CoreHeader :user="user"/>
     <RouterView class="mx-6 my-6" />
   </section>
 </template>

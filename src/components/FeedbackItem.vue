@@ -1,8 +1,8 @@
 <script setup>
-const props = defineProps(["feedback", "receiver"]);
+defineProps(["feedback", "receiver"]);
 </script>
 <template>
-  <div class="flex flex-col bg-slate-300 m-2 p-3 items-center" tabindex="0">
+  <div v-if="feedback && receiver" class="flex flex-col bg-slate-300 m-2 p-3 items-center" tabindex="0">
     <router-link
       :to="'/user/' + feedback.author.id"
       class="flex flex-row items-center mr-auto min-w-fit overflow-x-hidden"
@@ -38,7 +38,7 @@ const props = defineProps(["feedback", "receiver"]);
           + {{feedback.receivers.length}} more
       </span>
     </router-link>
-    <div class="bg-slate-200 flex-auto mx-2 px-1">
+    <div class="bg-slate-200 flex-auto mx-2 px-1 w-full">
       <p class="text-xl mb-3">{{ feedback.title }}</p>
       <p class="text">
         {{ feedback.body }}

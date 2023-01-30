@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps(["user"]);
+defineProps(["user"]);
 </script>
 
 <template>

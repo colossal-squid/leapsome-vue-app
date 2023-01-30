@@ -4,8 +4,12 @@ export function loadCurrentUser() {
     return fetch(`${API_URL}/users/current`).then(res => res.json())
 }
 
-export function findUsers() {
-    return fetch(`${API_URL}/users`).then(res => res.json())
+export function findUsers(pageSize = 10, page = 0, name = undefined) {
+    let url = `${API_URL}/users?take=${pageSize}&skip=${pageSize * page}`;
+    if (name) {
+        url += `&name=${name}`
+    }
+    return fetch(url).then(res => res.json())
 }
 
 export function loadUser(id) {
@@ -15,7 +19,7 @@ export function loadUser(id) {
     return fetch(`${API_URL}/users/${id}`).then(res => res.json())
 }
 
-export function loadFeedback ({author, receiver}) {
+export function loadFeedback({ author, receiver }) {
     if (author) {
         return fetch(`${API_URL}/feedback?by=${author}`).then(res => res.json())
     } else if (receiver) {
@@ -23,4 +27,13 @@ export function loadFeedback ({author, receiver}) {
     } else {
         return fetch(`${API_URL}/feedback`)
     }
+}
+
+export function createFeedback({ title, body, receiverIds }) {
+    return fetch(`${API_URL}/feedback`, {
+        method: 'post',
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ title, body, receiverIds })
+    }).then(res => res.json())
 }
