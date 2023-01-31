@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3022';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export function loadCurrentUser() {
     return fetch(`${API_URL}/users/current`).then(res => res.json())
@@ -36,7 +36,7 @@ export function createFeedback({ title, body, receiverIds }) {
     return fetch(`${API_URL}/feedback`, {
         method: 'post',
         mode: 'cors',
-        headers: {'Content-Type': 'application/json'},
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title, body, receiverIds })
     }).then(res => res.json())
 }
