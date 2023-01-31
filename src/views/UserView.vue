@@ -60,7 +60,7 @@ export default defineComponent({
             </h1>
           </div>
         </div>
-        <CoreButton link="true" :to="'/feedback/' + user.id">
+        <CoreButton link="true" :to="'/create-feedback/' + user.id">
           🫶 Give feedback
         </CoreButton>
       </figcaption>

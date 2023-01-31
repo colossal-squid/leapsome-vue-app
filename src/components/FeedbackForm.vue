@@ -5,7 +5,7 @@ export default {
   components: { CoreButton },
   props: {
     modelValue: Object,
-    receiver: Object,
+    receivers: Array,
   },
   setup(props, { emit }) {
     const feedback = computed({
@@ -45,8 +45,8 @@ export default {
     <span v-if="!feedback.title.length" class="text-sm text-red-500 mb-2"
       >Can't be empty</span
     >
-    <label class="text-base mb-2" v-if="receiver"
-      >Something nice about {{ receiver.firstName }}</label
+    <label class="text-base mb-2" v-if="receivers"
+      >Something nice about <TransitionGroup name="list"><span class="mr-1" v-for="receiver in receivers" :key="receiver.id"> {{ receiver.firstName }},</span></TransitionGroup></label
     >
     <textarea
       @keydown="onKeyDown"
@@ -75,3 +75,6 @@ export default {
     </CoreButton>
   </div>
 </template>
+<style scoped>
+
+</style>

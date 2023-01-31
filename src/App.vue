@@ -25,9 +25,14 @@ export default defineComponent({
 </script>
 
 <template>
-  <section class="container">
+  <section class="container w-full">
     <CoreHeader :user="user"/>
-    <RouterView class="mx-6 my-6" />
+    <RouterView v-if="user" class="mx-6 my-6 w-full" />
+    <!-- little skeleton for loading. blink and you'll miss it-->
+    <section class="flex flex-row flex-wrap h-48 m-4 w-screen" v-else>
+      <section class="w-96 animate-pulse bg-gray-300 h-48 ml-2 mb-2" v-for="i in [1,2,3,4,5,6,7,8,9,10,11,12]" :key="i">
+      </section>
+    </section>
   </section>
 </template>
 

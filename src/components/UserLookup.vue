@@ -6,9 +6,12 @@ import UserList from "./UserList.vue";
 import SearchBar from "./SearchBar.vue";
 import CoreButton from "./CoreButton.vue";
 
+const NOOP = () => false;
+
 export default defineComponent({
   components: { UserList, SearchBar, CoreButton },
-  setup() {
+  props: { isSelected: Function },
+  setup(props) {
     const pageSize = 20;
     const users = reactive([]);
     let pageNumber = ref(1);
@@ -22,13 +25,14 @@ export default defineComponent({
       users.push(...response.users);
       usersCount.value = response.count;
     };
-
     return {
       users,
       usersCount,
       pageSize,
       pageNumber,
       loadData,
+      isSelected:
+        typeof props.isSelected === "function" ? props.isSelected : NOOP,
       async userListForward() {
         if (
           usersCount.value > 0 &&
@@ -47,12 +51,15 @@ export default defineComponent({
       search: (name) => {
         if (name && name.length) {
           loadData(name);
+        } else {
+          // clear search
+          loadData();
         }
       },
     };
   },
   async mounted() {
-      this.loadData();
+    this.loadData();
   },
 });
 </script>
@@ -66,26 +73,12 @@ export default defineComponent({
     <UserList
       @forward="userListForward"
       @back="userListBack"
-      @select="user => $emit('select-user', user)"
+      @select="(user) => $emit('select-user', user)"
       :count="usersCount"
+      :is-selected="isSelected"
       :page="pageNumber"
       :pageSize="pageSize"
       :users="users"
     />
-    <CoreButton
-      class="
-        rounded-full
-        w-1
-        text-center text-2xl
-        m-auto
-        flex-col
-        absolute
-        top-20
-        right-8
-      "
-      link="true"
-      to="/feedback/"
-      >+</CoreButton
-    >
   </section>
 </template>

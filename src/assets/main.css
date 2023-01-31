@@ -1,1 +1,16 @@
 @import './base.css';
+
+/* every transition ever */
+.v-enter-active,
+.v-leave-active {
+  transition: all 0.9s ease;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.v-enter-from {
+  transform: translateX(-20px);
+}
+.v-enter-active .v-leave-to {
+  opacity: 0;
+}

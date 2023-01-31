@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import UserView from '../views/UserView.vue'
+import CreateFeedbackView from '../views/CreateFeedbackView.vue'
 import FeedbackView from '../views/FeedbackView.vue'
 import ErrorView from '../views/ErrorView.vue'
 
@@ -18,9 +19,14 @@ const router = createRouter({
       component: UserView
     },
     {
-      path: '/feedback/:userId?',
+      path: '/feedback/:feedbackId',
       name: 'feedback',
       component: FeedbackView
+    },
+    {
+      path: '/create-feedback/:userId?',
+      name: 'create-feedback',
+      component: CreateFeedbackView
     },
     {
       path: '/error',

@@ -1,41 +1,24 @@
 <script>
 import { defineComponent, reactive, watch } from "vue";
-import { storeToRefs } from "pinia";
 import { useRoute } from "vue-router";
-import { useUserStore } from "../store";
-import { loadUser, createFeedback } from "../data";
-import router from "../router";
-import FeedbackForm from "../components/FeedbackForm.vue";
-import UserList from "../components/UserList.vue";
+import { loadFeedback } from "../data";
+import FeedbackItem from "../components/FeedbackItem.vue";
+import CoreButton from "../components/CoreButton.vue";
 
 export default defineComponent({
-  components: { FeedbackForm },
+  components: { CoreButton, FeedbackItem },
   setup() {
-    const route = useRoute();
-    const store = useUserStore();
-    const { user } = storeToRefs(store);
-    const receiver = reactive({}),
-      feedback = reactive({
-        title: "",
-        body: "",
-      }),
+    const route = useRoute(),
+      feedback = reactive({}),
       loadData = async () => {
-        const id = route.params.userId;
-        const result = await loadUser(id);
-        Object.assign(receiver, result);
+        const result = await loadFeedback({ id: route.params.feedbackId });
+        Object.assign(feedback, result);
       };
     watch(route, () => loadData());
     return {
-      feedback,
       loadData,
-      receiver,
-      sendFeedback: async () => {
-        const receiverIds = [Number(route.params.userId)];
-        const { title, body } = feedback;
-        await createFeedback({ title, body, receiverIds });
-        router.push(`/user/${route.params.userId}`);
-      },
-      user,
+      route,
+      feedback,
     };
   },
   mounted() {
@@ -45,39 +28,15 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="w-full">
-    <section class="flex">
-      <img
-        v-if="user"
-        :src="user.avatar"
-        alt=""
-        class="flex-none w-14 h-14 rounded-full object-cover m-2"
-        loading="lazy"
-        decoding="async"
-      />
-      <Transition>
-        <img
-          v-if="receiver && receiver.avatar"
-          :src="receiver.avatar"
-          alt=""
-          class="flex-none w-14 h-14 rounded-full object-cover m-2"
-          loading="lazy"
-          decoding="async"
-        />
-      </Transition>
-    </section>
-
-    <Transition>
-      <FeedbackForm
-        v-if="receiver && receiver.avatar"
-        v-model="feedback"
-        @post="sendFeedback"
-        :receiver="receiver"
-      />
-    </Transition>
+  <div class="w-full h-full mx-6 my-6 flex flex-col items-center">
+    <FeedbackItem expanded="true" v-if="feedback.id" :feedback="feedback" />
+    <CoreButton class="my-4" link="true" to="/">Go Back Home</CoreButton>
   </div>
 </template>
 <style scoped>
+.big-emoji {
+  font-size: 8em;
+}
 .v-enter-active,
 .v-leave-active {
   transition: all 0.9s ease;

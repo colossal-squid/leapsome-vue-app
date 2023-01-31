@@ -1,7 +1,7 @@
 <script>
 import { defineComponent, reactive } from "vue";
 import { storeToRefs } from "pinia";
-import router from '../router';
+import router from "../router";
 import { loadFeedback } from "../data";
 import { useUserStore } from "../store";
 import FeedbackItem from "../components/FeedbackItem.vue";
@@ -23,14 +23,12 @@ export default defineComponent({
     };
   },
   async mounted() {
-    const feedback = await this.loadFeedback({ receiver: this.user?.id });
+    const feedback = await this.loadFeedback({ receiver: this.user.id });
     if (feedback.length > 3) {
       // i only want to show 3, so..
-      feedback.splice(3, feedback.length - 3)
+      feedback.splice(3, feedback.length - 3);
     }
-    this.recentFeedback.push(
-      ...(feedback)
-    );
+    this.recentFeedback.push(...feedback);
   },
 });
 </script>
@@ -54,10 +52,25 @@ export default defineComponent({
         How about giving some useful feedback to fellow co-workers?
       </p>
       <p class="text-xl mb-2">
-        Click on anyone to say a few nice works about them or press the big plus button in top right corner.
+        Click on anyone to say a few nice works about them or press the big plus
+        button in top right corner.
       </p>
-      <UserLookup @select-user="onUserSelect"/>
-        <CoreButton class="rounded-full w-1 text-center text-2xl m-auto flex-col absolute top-20 right-8" link="true" to="/feedback/">+</CoreButton>
+      <UserLookup @select-user="onUserSelect" />
+      <CoreButton
+        class="
+          rounded-full
+          w-1
+          text-center text-2xl
+          m-auto
+          flex-col
+          absolute
+          top-20
+          right-8
+        "
+        link="true"
+        to="/create-feedback/"
+        >+</CoreButton
+      >
     </section>
   </main>
 </template>

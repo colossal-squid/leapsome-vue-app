@@ -19,8 +19,11 @@ export function loadUser(id) {
     return fetch(`${API_URL}/users/${id}`).then(res => res.json())
 }
 
-export function loadFeedback({ author, receiver }) {
-    if (author) {
+export function loadFeedback({ author, receiver, id }) {
+    if (id) {
+        return fetch(`${API_URL}/feedback/${id}`).then(res => res.json())
+    }
+    else if (author) {
         return fetch(`${API_URL}/feedback?by=${author}`).then(res => res.json())
     } else if (receiver) {
         return fetch(`${API_URL}/feedback?for=${receiver}`).then(res => res.json())
