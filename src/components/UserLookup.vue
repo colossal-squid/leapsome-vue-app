@@ -4,12 +4,11 @@ import { defineComponent, reactive, ref } from "vue";
 import { findUsers } from "../data";
 import UserList from "./UserList.vue";
 import SearchBar from "./SearchBar.vue";
-import CoreButton from "./CoreButton.vue";
 
 const NOOP = () => false;
 
 export default defineComponent({
-  components: { UserList, SearchBar, CoreButton },
+  components: { UserList, SearchBar },
   props: { isSelected: Function },
   setup(props) {
     const pageSize = 20;
@@ -31,8 +30,7 @@ export default defineComponent({
       pageSize,
       pageNumber,
       loadData,
-      isSelected:
-        typeof props.isSelected === "function" ? props.isSelected : NOOP,
+      isUserSelected: typeof props.isSelected === "function" ? props.isSelected : NOOP,
       async userListForward() {
         if (
           usersCount.value > 0 &&
@@ -75,7 +73,7 @@ export default defineComponent({
       @back="userListBack"
       @select="(user) => $emit('select-user', user)"
       :count="usersCount"
-      :is-selected="isSelected"
+      :is-selected="isUserSelected"
       :page="pageNumber"
       :pageSize="pageSize"
       :users="users"
